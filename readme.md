@@ -1,6 +1,4 @@
-Aqui está um exemplo de **README.md** para o seu projeto Jupyter que utiliza o **RAG (Retrieval-Augmented Generation)** com **LangChain** e **Ollama** localmente, lendo um PDF da pasta `files`. Este README fornece instruções sobre como configurar e usar o projeto.
 
----
 
 # RAG com LangChain e Ollama: Leitura de PDF Local
 
@@ -93,40 +91,6 @@ O código no Jupyter Notebook pode ser facilmente modificado para:
 - Utilizar outros modelos de linguagem de sua escolha.
 - Alterar o arquivo PDF de entrada para outros documentos.
 - Modificar a lógica de recuperação e geração, conforme as necessidades do seu projeto.
-
-## 📄 Exemplo de Uso
-
-Aqui está um exemplo básico do fluxo de trabalho no Jupyter Notebook:
-
-```python
-# Importando as bibliotecas necessárias
-from langchain_ollama import OllamaEmbeddings
-from langchain.document_loaders import PyPDFLoader
-from langchain.vectorstores import Chroma
-from langchain.chains import RetrievalQA
-
-# Carregando o PDF local
-pdf_path = './files/documento.pdf'
-loader = PyPDFLoader(pdf_path)
-documents = loader.load()
-
-# Inicializando embeddings com Ollama
-embedding = OllamaEmbeddings(model="nomic-embed-text")
-vectorstore = Chroma.from_documents(documents, embedding)
-
-# Configurando o modelo de geração com LangChain
-qa_chain = RetrievalQA.from_chain_type(
-    llm=embedding,
-    retriever=vectorstore.as_retriever()
-)
-
-# Fazendo uma pergunta ao modelo
-query = "Qual é o resumo do documento?"
-response = qa_chain.run(query)
-
-# Exibindo a resposta gerada
-print(response)
-```
 
 ### Passo 5: Exemplo de Pergunta ao Modelo
 
